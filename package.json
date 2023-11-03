@@ -1,0 +1,13 @@
+{
+  "name": "lab2-basic-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Min Thit khine",
+  "license": "MIT",
+  "devDependencies": {},
+  "keywords": []
+}
