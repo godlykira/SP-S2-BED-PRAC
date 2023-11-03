@@ -1,23 +1,31 @@
 {
   "scripts": {
-    "test": "jest --forceExit",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "test": "npm run init_tables && jest --forceExit",
+    "init_tables": "node src/configs/initTables.js",
+    "create": "node examples/crud/create.js",
+    "read": "node examples/crud/read.js",
+    "update": "node examples/crud/update.js",
+    "delete": "node examples/crud/delete.js",
+    "start": "npm run init_tables && npm run read && npm run create && npm run read && npm run update && npm run read && npm run delete & npm run read",
+    "populate": "node src/configs/initPokedex.js && node populateDex.js"
   },
   "dependencies": {
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jest": "^29.7.0",
-    "nodemon": "^3.0.1",
-    "supertest": "^6.3.3"
+    "mysql2": "^3.6.2",
+    "nodemon": "^3.0.1"
   },
-  "name": "lab3-exercise",
+  "name": "lab4-exercise",
+  "description": "This repository contains a practice for the models of an Express.js application. The practice is designed to evaluate the implementation of the model functions that interact with the database. The following instructions outline the expected behavior that will be tested.",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Min Thit Khine",
-  "license": "MIT",
   "directories": {
+    "example": "examples",
     "test": "tests"
   },
   "keywords": [],
-  "description": ""
+  "author": "Min Thit Khine",
+  "license": "MIT"
 }
