@@ -6,6 +6,9 @@ const controller = require('../controllers/playerController');
 router.get('/', controller.readAllPlayer);
 router.post('/', controller.createNewPlayer);
 
+// Advance
+router.get('/user', controller.readAllRefs);
+
 router.get('/:id', controller.readPlayerById);
 
 router.put('/:id', controller.updatePlayerById);

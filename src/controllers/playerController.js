@@ -15,7 +15,6 @@ module.exports.readPlayerById = (req, res, next) => {
   const data = {
     id: req.params.id,
   };
-
   const callback = (error, results, fields) => {
     if (error) {
       console.error('Error readPlayerById:', error);
@@ -40,7 +39,9 @@ module.exports.createNewPlayer = (req, res, next) => {
 
   const data = {
     name: req.body.name,
-    level: 1,
+    level: req.body.level || 1,
+    // Assign the value of req.body.level to level if it is truthy, otherwise use 1
+    userId: req.params.userId,
   };
 
   const callback = (error, results, fields) => {
@@ -48,7 +49,12 @@ module.exports.createNewPlayer = (req, res, next) => {
       console.error('Error createNewPlayer:', error);
       res.status(500).json(error);
     } else {
-      res.status(201).json(results);
+      if (req.params.userId != undefined) {
+        req.body = {
+          newPlayerId: results.insertId,
+        };
+        next();
+      } else res.status(201).json(results);
     }
   };
 
@@ -64,7 +70,7 @@ module.exports.updatePlayerById = (req, res, next) => {
   }
 
   const data = {
-    id: req.params.id,
+    id: req.params.id || req.params.playerId,
     name: req.body.name,
     level: req.body.level,
   };
@@ -78,6 +84,8 @@ module.exports.updatePlayerById = (req, res, next) => {
         res.status(404).json({
           message: 'Player not found',
         });
+      } else if (req.params.playerId != undefined) {
+        next();
       } else res.status(204).send(); // 204 No Content
     }
   };
@@ -87,7 +95,7 @@ module.exports.updatePlayerById = (req, res, next) => {
 
 module.exports.deletePlayerById = (req, res, next) => {
   const data = {
-    id: req.params.id,
+    id: req.params.id || req.params.playerId,
   };
 
   const callback = (error, results, fields) => {
@@ -104,4 +112,17 @@ module.exports.deletePlayerById = (req, res, next) => {
   };
 
   model.deleteById(data, callback);
+};
+
+// Advance
+
+module.exports.readAllRefs = (req, res, next) => {
+  const callback = (error, results, fields) => {
+    if (error) {
+      console.error('Error readAllRefs:', error);
+      res.status(500).json(error);
+    } else res.status(200).json(results);
+  };
+
+  model.selectAllRef(callback);
 };

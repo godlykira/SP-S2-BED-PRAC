@@ -43,3 +43,15 @@ module.exports.deleteById = (data, callback) => {
 
   pool.query(SQLSTATEMENT, VALUES, callback);
 };
+
+// Advance
+
+module.exports.selectAllRef = (callback) => {
+  const SQLSTATEMENT = `
+      SELECT PlayerUserRel.user_id, PlayerUserRel.player_id, User.username, Player.name as character_name, Player.level as character_level, Player.created_on as char_created_on, User.created_on as user_created_on
+      FROM PlayerUserRel
+      INNER JOIN Player ON Player.id = PlayerUserRel.player_id
+      INNER JOIN User ON User.id = PlayerUserRel.user_id;
+  `;
+  pool.query(SQLSTATEMENT, callback);
+};
