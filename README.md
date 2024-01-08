@@ -13,6 +13,7 @@ The branches of this repository contain various resources related to the project
 - [Practical 3](https://github.com/godlykira/Pokemon_Game/tree/prac3)
 - [Practical 4](https://github.com/godlykira/Pokemon_Game/tree/prac4)
 - [Practical 5](https://github.com/godlykira/Pokemon_Game/tree/prac5)
+- [Practical 6](https://github.com/godlykira/SP-S2-BED-PRAC/tree/prac6)
 
 ## Contributing
 
